@@ -5,17 +5,16 @@ import {HttpClient} from '@angular/common/http';
     providedIn: 'root'
 })
 export class QuizService {
-    readonly apiUrl: string = '';
+    readonly apiUrl: string = 'https://angular-quiz-2b91b.firebaseio.com/users.json';
 
-    constructor(private http: HttpClient) {
+    constructor(private _httpClient: HttpClient) {
     }
 
     insertParticipant(name: string, email: string) {
-        const body = {
+        const user = JSON.stringify({
             name,
             email
-        };
-
-        return this.http.post(this.apiUrl, body);
+        });
+        return this._httpClient.post(this.apiUrl, JSON.parse(user));
     }
 }

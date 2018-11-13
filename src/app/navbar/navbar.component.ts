@@ -9,7 +9,7 @@ import {Router} from '@angular/router';
 })
 export class NavbarComponent implements OnInit {
 
-    constructor(private quizService: QuizService, private router: Router) {
+    constructor(private _quizService: QuizService, private _router: Router) {
     }
 
     ngOnInit() {
@@ -17,6 +17,6 @@ export class NavbarComponent implements OnInit {
 
     SignOut() {
         localStorage.clear();
-        this.router.navigate(['/register']);
+        this._router.navigate(['/register']);
     }
 }

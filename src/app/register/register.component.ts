@@ -11,17 +11,18 @@ export class RegisterComponent implements OnInit {
 
     emailPattern = '^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$';
 
-    constructor(private _quizService: QuizService, private route: Router) {
+    constructor(private _quizService: QuizService, private _router: Router) {
     }
 
     ngOnInit() {
     }
 
     onSubmit(name: string, email: string) {
-        this._quizService.insertParticipant(name, email).subscribe(
-            (data: any) => {
-                this.route.navigate(['/quiz']);
-            }
-        );
+        this._quizService.insertParticipant(name, email)
+            .subscribe(
+                () => {
+                    this._router.navigate(['/quiz']);
+                }
+            );
     }
 }

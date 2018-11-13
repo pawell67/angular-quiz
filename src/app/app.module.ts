@@ -7,19 +7,23 @@ import {RouterModule} from '@angular/router';
 import {appRoutes} from './routes';
 import {QuizComponent} from './quiz/quiz.component';
 import {QuizService} from './quiz/quiz.service';
-import { NavbarComponent } from './navbar/navbar.component';
+import {NavbarComponent} from './navbar/navbar.component';
+import {AuthGuard} from './auth/auth.guard';
+import {HttpClientModule} from '@angular/common/http';
+import {ResultComponent} from './result/result.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         RegisterComponent,
         QuizComponent,
-        NavbarComponent
+        NavbarComponent,
+        ResultComponent,
     ],
     imports: [
-        BrowserModule, RouterModule.forRoot(appRoutes), FormsModule
+        BrowserModule, RouterModule.forRoot(appRoutes), FormsModule, HttpClientModule
     ],
-    providers: [QuizService],
+    providers: [QuizService, AuthGuard],
     bootstrap: [AppComponent]
 })
 export class AppModule {
