@@ -5,16 +5,21 @@ import {AppComponent} from './app.component';
 import {RegisterComponent} from './register/register.component';
 import {RouterModule} from '@angular/router';
 import {appRoutes} from './routes';
+import {QuizComponent} from './quiz/quiz.component';
+import {QuizService} from './quiz/quiz.service';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
     declarations: [
         AppComponent,
-        RegisterComponent
+        RegisterComponent,
+        QuizComponent,
+        NavbarComponent
     ],
     imports: [
         BrowserModule, RouterModule.forRoot(appRoutes), FormsModule
     ],
-    providers: [],
+    providers: [QuizService],
     bootstrap: [AppComponent]
 })
 export class AppModule {
