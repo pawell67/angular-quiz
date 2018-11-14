@@ -5,9 +5,20 @@ import {HttpClient} from '@angular/common/http';
     providedIn: 'root'
 })
 export class QuizService {
-    readonly apiUrl: string = 'https://angular-quiz-2b91b.firebaseio.com/users.json';
+    readonly databaseUrl: string = 'https://angular-quiz-2b91b.firebaseio.com/users.json';
+    readonly apiUrl: string = 'https://opentdb.com/api.php?amount=10&category=18&type=multiple';
+
+    questions: object[] = [];
+    seconds: number;
+    timer: number;
+    questionProgress: number;
 
     constructor(private _httpClient: HttpClient) {
+    }
+
+    getParticipantName() {
+        const participant = JSON.parse(localStorage.getItem('participant'));
+        return participant.name;
     }
 
     insertParticipant(name: string, email: string) {
@@ -15,6 +26,10 @@ export class QuizService {
             name,
             email
         });
-        return this._httpClient.post(this.apiUrl, JSON.parse(user));
+        return this._httpClient.post(this.databaseUrl, JSON.parse(user));
+    }
+
+    getQuestions() {
+        return this._httpClient.get(this.apiUrl);
     }
 }
