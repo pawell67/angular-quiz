@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {QuizService} from './quiz.service';
 import shuffle from '../utils';
+import {Question} from '../model/question';
 
 @Component({
     selector: 'app-quiz',
@@ -19,10 +20,10 @@ export class QuizComponent implements OnInit {
         this._quizService.getQuestions().subscribe(
             (data: any) => {
                 data.results.map((result) => {
-                    const question = {};
-                    question['answers'] = shuffle(result.incorrect_answers.concat(result.correct_answer));
-                    question['correct'] = result.correct_answer;
-                    question['question'] = result.question;
+                    const answers = shuffle(result.incorrect_answers.concat(result.correct_answer));
+                    const correct = result.correct_answer;
+                    const content = result.question;
+                    const question: Question = new Question(answers, correct, content);
                     this._quizService.questions.push(question);
                 });
                 this.startTimer();
@@ -36,7 +37,13 @@ export class QuizComponent implements OnInit {
         }, 1000);
     }
 
-    answerQuestion(question: any, i: number) {
-        console.log(question, i);
+    answerQuestion(answer: string) {
+        this._quizService.questions[this._quizService.questionProgress].userAnswer = answer;
+        this._quizService.questionProgress++;
+
+        if (this._quizService.questionProgress === 10) {
+            clearInterval(this._quizService.timer);
+            this._router.navigate(['/result']);
+        }
     }
 }
