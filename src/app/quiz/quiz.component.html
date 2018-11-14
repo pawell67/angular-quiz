@@ -1,5 +1,6 @@
 <app-navbar></app-navbar>
 <div class="row" *ngIf="_quizService.questions">
+   <span *ngIf="_quizService.getParticipant()">Hello {{_quizService.getParticipant()}} </span>
     <div class="col s8 offset-s2">
         <span>Time Elapsed: {{_quizService.displayTimeElapsed()}}</span>
         <div class="progress">

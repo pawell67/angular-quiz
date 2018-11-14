@@ -20,9 +20,9 @@ export class RegisterComponent implements OnInit {
     onSubmit(name: string, email: string) {
         this._quizService.insertParticipant(name, email)
             .subscribe(
-                (data: any) => {
+                () => {
                     localStorage.clear();
-                    localStorage.setItem('participant', JSON.stringify(data));
+                    localStorage.setItem('participant', JSON.stringify(name));
                     this._router.navigate(['/quiz']);
                 }
             );

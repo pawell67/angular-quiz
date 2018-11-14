@@ -15,6 +15,7 @@ export class QuizComponent implements OnInit {
     }
 
     ngOnInit() {
+        this._quizService.questions = [];
         this._quizService.seconds = 0;
         this._quizService.questionProgress = 0;
         this._quizService.getQuestions().subscribe(

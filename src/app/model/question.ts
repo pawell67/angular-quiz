@@ -10,4 +10,12 @@ export class Question {
     getAnswers() {
         return this.answers;
     }
+
+    getCorrectAnswer() {
+        return this.correct;
+    }
+
+    getUserAnswer() {
+        return this.userAnswer;
+    }
 }
